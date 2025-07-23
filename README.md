@@ -21,7 +21,8 @@ A simple Spring Boot 3.x CRUD application using Java 24 and Amazon DynamoDB. Thi
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Java 24+
+- Java v24+
+- Gradle v8+
 - AWS credentials with DynamoDB access
 - [DynamoDB Local](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html) (optional for local testing)
 
@@ -29,3 +30,4 @@ A simple Spring Boot 3.x CRUD application using Java 24 and Amazon DynamoDB. Thi
 
 ```bash
 ./gradlew bootrun
+```

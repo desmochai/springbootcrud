@@ -32,7 +32,7 @@ A simple Spring Boot 3.x CRUD application using Java 24 and Amazon DynamoDB. Thi
 ./gradlew bootrun
 ```
 
-### API Endpoints
+## API Endpoints
 
 | Method | Endpoint       | Description       |
 |--------|----------------|-------------------|
@@ -42,16 +42,18 @@ A simple Spring Boot 3.x CRUD application using Java 24 and Amazon DynamoDB. Thi
 | PUT    | `/items/{id}`  | Update item       |
 | DELETE | `/items/{id}`  | Delete item       |
 
-### 📁 Suggested Project Structure
+## Project Structure
 
+```text
 com.desmochai.springbootcrud
 ├── controller     # Handles incoming HTTP requests
 ├── service        # Business logic layer
 ├── repository     # DynamoDB interaction layer
 ├── model          # Data models / DTOs
 └── config         # Configuration (AWS and other)
+```
 
-### 🧪 TODOs
+## 🧪 TODOs
 	•	Add Swagger UI
 	•	Add unit/integration tests
 	•	Dockerize the app

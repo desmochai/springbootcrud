@@ -5,6 +5,8 @@ import com.desmochai.boot.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
@@ -20,4 +22,10 @@ public class ItemServiceImpl implements ItemService {
     public Item getItemById(String id) {
         return itemRepository.getItemById(id);
     }
+
+    @Override
+    public List<Item> getAllItems() {
+        return itemRepository.getAllItems();
+    }
+
 }

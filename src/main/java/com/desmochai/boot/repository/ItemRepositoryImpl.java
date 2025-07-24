@@ -4,12 +4,11 @@ import com.desmochai.boot.model.Item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
-import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
-import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
-import software.amazon.awssdk.services.dynamodb.model.GetItemResponse;
-import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
+import software.amazon.awssdk.services.dynamodb.model.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -34,12 +33,33 @@ public class ItemRepositoryImpl implements ItemRepository {
     }
 
     @Override
+    public List<Item> getAllItems() {
+        ScanRequest request = ScanRequest.builder()
+                .tableName(TABLE_NAME)
+                .build();
+
+        ScanResponse response = dynamoDbClient.scan(request);
+
+        List<Item> items = new ArrayList<>();
+
+        for (Map<String, AttributeValue> map : response.items()) {
+            Item item = new Item();
+            item.setId(map.get("id").s());
+            item.setName(map.get("name").s());
+            item.setDescription(map.get("description").s());
+            items.add(item);
+        }
+
+        return items;
+    }
+
+    @Override
     public Item getItemById(String id) {
         Map<String, AttributeValue> key = new HashMap<>();
         key.put("id", AttributeValue.builder().s(id).build());
 
         GetItemRequest request = GetItemRequest.builder()
-                .tableName("items")
+                .tableName(TABLE_NAME)
                 .key(key)
                 .build();
 

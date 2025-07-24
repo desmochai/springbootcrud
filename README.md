@@ -17,6 +17,15 @@ A simple Spring Boot 3.x CRUD application using Java 24 and Amazon DynamoDB. Thi
 - Global exception handling
 - Input validation
 - Layered architecture (Controller → Service → Repository)
+## 🧱 Overview
+
+| **Responsibility**          | **Where it Lives**                                               | **Purpose / Data Structure**                                         |
+|----------------------------|------------------------------------------------------------------|----------------------------------------------------------------------|
+| Define the data model      | `model/Item.java`                                                | POJO with fields: `id`, `name`, `description`                        |
+| Handle database access     | `repository/ItemRepository.java` + `ItemRepositoryImpl.java`     | Talks directly to DynamoDB via AWS SDK                              |
+| Encapsulate business logic | `service/ItemService.java` + `ItemServiceImpl.java`              | Calls repository, applies business logic if needed                  |
+| Expose HTTP endpoints      | `controller/ItemController.java`                                 | Defines REST API like `POST /items`                                 |
+| Configure AWS SDK client   | `config/AwsClientConfig.java`                                    | Instantiates `DynamoDbClient` using profile credentials (DefaultProvider)` |
 
 ## 🚀 Getting Started
 
@@ -29,23 +38,23 @@ A simple Spring Boot 3.x CRUD application using Java 24 and Amazon DynamoDB. Thi
 ### Running the App
 
 ```bash
-./gradlew bootrun
+  gradle bootrun
 ```
 
 ## API Endpoints
 
-| Method | Endpoint       | Description       |
-|--------|----------------|-------------------|
-| GET    | `/items`       | Get all items     |
-| GET    | `/items/{id}`  | Get item by ID    |
-| POST   | `/items`       | Create new item   |
-| PUT    | `/items/{id}`  | Update item       |
-| DELETE | `/items/{id}`  | Delete item       |
+| Method | Endpoint                                    | Description       |
+|--------|---------------------------------------------|-------------------|
+| GET    | `/items`                                    | Get all items     |
+| GET    | `/items/{id}`                               | Get item by ID    |
+| POST   | `/items` {id, name, description} as payload | Create new item   |
+| PUT    | `/items/{id}`                               | Update item       |
+| DELETE | `/items/{id}`                               | Delete item       |
 
 ## Project Structure
 
 ```text
-com.desmochai.springbootcrud
+com.desmochai.boot
 ├── controller     # Handles incoming HTTP requests
 ├── service        # Business logic layer
 ├── repository     # DynamoDB interaction layer

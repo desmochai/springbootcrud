@@ -29,3 +29,5 @@ replay_pid*
 .env
 .idea/
 *.DS_Store
+.gradle/
+build/

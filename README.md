@@ -2,12 +2,25 @@
 
 A simple Spring Boot 3.x CRUD application using Java 24 and Amazon DynamoDB. This project demonstrates how to build RESTful APIs with Spring Boot while integrating with AWS DynamoDB as the primary data store.
 
-## TODOs
-	•	Add Swagger UI
-    •	Replace AWS SDK v2 with AWS enhanced client
-	•	Add unit/integration tests
-	•	Dockerize the app
-	•	CI/CD pipeline (GitHub Actions)
+## Postman Collection
+
+You can test all API endpoints using the included Postman collection:
+- [`item-crud-api.postman_collection.json`](postman/item-crud-api.postman_collection.json)
+
+To import:
+1. Open Postman
+2. Click "Import"
+3. Choose the file saved here `src/postman`
+
+## Polishing
+- Add DTOs (ItemRequest, ItemResponse)
+- Add validations (@Valid, @NotBlank)
+- Implement global exception handler
+- Add Swagger UI
+- Replace AWS SDK v2 with AWS enhanced client
+- Add unit/integration tests
+- Dockerize the app
+- CI/CD pipeline (GitHub Actions)
 
 ## Tech Stack
 

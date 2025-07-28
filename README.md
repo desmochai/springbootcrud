@@ -2,6 +2,13 @@
 
 A simple Spring Boot 3.x CRUD application using Java 24 and Amazon DynamoDB. This project demonstrates how to build RESTful APIs with Spring Boot while integrating with AWS DynamoDB as the primary data store.
 
+## TODOs
+	•	Add Swagger UI
+    •	Replace AWS SDK v2 with AWS enhanced client
+	•	Add unit/integration tests
+	•	Dockerize the app
+	•	CI/CD pipeline (GitHub Actions)
+
 ## Tech Stack
 
 - Java 24
@@ -61,9 +68,3 @@ com.desmochai.boot
 ├── model          # Data models / DTOs
 └── config         # Configuration (AWS and other)
 ```
-
-## TODOs
-	•	Add Swagger UI
-	•	Add unit/integration tests
-	•	Dockerize the app
-	•	CI/CD pipeline (GitHub Actions)

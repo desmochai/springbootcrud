@@ -28,4 +28,9 @@ public class ItemServiceImpl implements ItemService {
         return itemRepository.getAllItems();
     }
 
+    @Override
+    public void updateItem(String id, Item item) {
+        itemRepository.updateItem(id, item);
+    }
+
 }

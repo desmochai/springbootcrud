@@ -8,4 +8,5 @@ public interface ItemRepository {
     void save(Item item);
     Item getItemById(String id);
     List<Item> getAllItems();
+    void updateItem(String id, Item item);
 }

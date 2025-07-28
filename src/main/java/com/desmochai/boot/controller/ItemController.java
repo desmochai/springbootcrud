@@ -45,4 +45,16 @@ public class ItemController {
     public ResponseEntity<List<Item>> getAllItems() {
         return ResponseEntity.ok(itemService.getAllItems());
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateItem(@PathVariable String id, @RequestBody Item item) {
+        try {
+            itemService.updateItem(id, item);
+            return ResponseEntity.ok("Item updated successfully");
+        } catch (Exception e) {
+            e.printStackTrace(); // TODO: replace with robust logging
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to update item: " + e.getMessage());
+        }
+    }
 }

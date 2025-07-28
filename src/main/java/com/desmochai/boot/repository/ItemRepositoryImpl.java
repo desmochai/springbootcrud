@@ -80,4 +80,41 @@ public class ItemRepositoryImpl implements ItemRepository {
         item.setDescription(returnedItem.getOrDefault("description", AttributeValue.fromS("")).s());
         return item;
     }
+
+    /*
+    *
+    * TODO: Use AWS Enhanced client to remove repetitive boilerplate
+    *
+    * */
+
+    @Override
+    public void updateItem(String id, Item item) {
+        Map<String, AttributeValue> key = new HashMap<>();
+        key.put("id", AttributeValue.builder().s(id).build()); // Only use the path ID
+
+        Map<String, AttributeValue> expressionAttributeValues = new HashMap<>();
+        expressionAttributeValues.put(":name", AttributeValue.builder().s(item.getName()).build());
+        expressionAttributeValues.put(":description", AttributeValue.builder().s(item.getDescription()).build());
+
+        Map<String, String> expressionAttributeNames = new HashMap<>();
+        expressionAttributeNames.put("#name", "name");
+        expressionAttributeNames.put("#description", "description");
+
+        UpdateItemRequest request = UpdateItemRequest.builder()
+                .tableName(TABLE_NAME)
+                .key(key)
+                .updateExpression("SET #name = :name, #description = :description")
+                .expressionAttributeNames(expressionAttributeNames)
+                .expressionAttributeValues(expressionAttributeValues)
+                .conditionExpression("attribute_exists(id)") // ensures item exists
+                .build();
+
+        try {
+            dynamoDbClient.updateItem(request);
+        } catch (ConditionalCheckFailedException e) {
+            throw new RuntimeException("Update failed: Item with ID " + id + " does not exist.");
+        } catch (DynamoDbException e) {
+            throw new RuntimeException("DynamoDB error: " + e.getMessage(), e);
+        }
+    }
 }

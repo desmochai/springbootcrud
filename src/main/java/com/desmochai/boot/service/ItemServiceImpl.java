@@ -33,4 +33,9 @@ public class ItemServiceImpl implements ItemService {
         itemRepository.updateItem(id, item);
     }
 
+    @Override
+    public void deleteItem(String id) {
+        itemRepository.deleteItem(id);
+    }
+
 }

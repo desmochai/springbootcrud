@@ -117,4 +117,25 @@ public class ItemRepositoryImpl implements ItemRepository {
             throw new RuntimeException("DynamoDB error: " + e.getMessage(), e);
         }
     }
+
+    @Override
+    public void deleteItem(String id) {
+        Map<String, AttributeValue> key = Map.of(
+                "id", AttributeValue.builder().s(id).build()
+        );
+
+        DeleteItemRequest request = DeleteItemRequest.builder()
+                .tableName(TABLE_NAME)
+                .key(key)
+                .conditionExpression("attribute_exists(id)") // prevent deleting non-existent item
+                .build();
+
+        try {
+            dynamoDbClient.deleteItem(request);
+        } catch (ConditionalCheckFailedException e) {
+            throw new RuntimeException("Item with ID " + id + " does not exist.");
+        } catch (DynamoDbException e) {
+            throw new RuntimeException("Failed to delete item: " + e.getMessage(), e);
+        }
+    }
 }

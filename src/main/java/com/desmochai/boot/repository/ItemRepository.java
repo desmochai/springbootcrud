@@ -9,4 +9,5 @@ public interface ItemRepository {
     Item getItemById(String id);
     List<Item> getAllItems();
     void updateItem(String id, Item item);
+    void deleteItem(String id);
 }

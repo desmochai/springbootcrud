@@ -5,7 +5,7 @@ A simple Spring Boot 3.x CRUD application using Java 24 and Amazon DynamoDB. Thi
 ## Postman Collection
 
 You can test all API endpoints using the included Postman collection:
-- [`item-crud-api.postman_collection.json`](postman/item-crud-api.postman_collection.json)
+- [`item-crud-api.postman_collection.json`](src/postman/item-crud-api.postman_collection.json)
 
 To import:
 1. Open Postman

@@ -10,7 +10,6 @@ You can test all API endpoints using the included Postman collection:
 To import:
 1. Open Postman
 2. Click "Import"
-3. Choose the file saved here `src/postman`
 
 ## Polishing
 - Add DTOs (ItemRequest, ItemResponse)
